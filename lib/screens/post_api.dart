@@ -12,6 +12,7 @@ class ApiPost {
       "mobile": myController1.toString(),
       "designation": myController2.toString(),
       "email": myController3.toString(),
+
     });
     // String url = "https://interns-new.herokuapp.com/list";
     // Uri uri = Uri.parse(url);

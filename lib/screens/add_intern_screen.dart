@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/main.dart';
 import 'package:untitled/screens/post_api.dart';
 
 import '../models/search_model.dart';
@@ -49,6 +50,7 @@ class _MyCustomTextState extends State<MyCustomText> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Second Route'),
@@ -59,96 +61,174 @@ class _MyCustomTextState extends State<MyCustomText> {
               Navigator.pop(context);
             },
             child: Container(
-              height: 400,
+              padding: EdgeInsets.only(top:30),
+              height: 600,
               width: 300,
               child: Column(
                 children: [
-                  Column(
-                    children:  [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom:15),
-                        child: TextField(
-                          controller: myController,
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children:[
+                        Padding(
+                          padding: EdgeInsets.only(bottom:15),
+                          child: TextFormField(
+                            controller: myController,
 
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: "Name",
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: "Name",
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                       Padding(
-                        padding: EdgeInsets.only(bottom:15),
-                        child: TextField(
-                          controller: myController1,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: "Mobile no.",
+                        Padding(
+                          padding: EdgeInsets.only(bottom:15),
+                          child:TextFormField(
+                            controller: myController1,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: "Mobile no.",
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some number';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                       Padding(
-                        padding: EdgeInsets.only(bottom:15),
-                        child: TextField(
-                          controller: myController2,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: "designation",
+                        Padding(
+                          padding: EdgeInsets.only(bottom:15),
+                          child:TextFormField(
+                            controller: myController2,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: "designation",
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom:15),
-                        child: TextField(
-                          controller: myController3,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: "Email id",
+                        Padding(
+                          padding: EdgeInsets.only(bottom:15),
+                          child: TextFormField(
+                            controller: myController3,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: "Email id",
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Container(
-                      child: FloatingActionButton.extended(
 
-
-                        onPressed: () {
-                          // snapshot.data!.result!.name.toString();
-                          // myController.text;
-                          // myController1.text;
-                          // myController2.text;
-                          // myController3.text;
-                          apiPost.postData(myController.text, myController1.text, myController2.text, myController3.text);
-
-
-                          // print(myController.text);
-                          // print(myController1.text);
-                          // print(myController2.text);
-                          // print(myController3.text);
-
-
-                        },
-
-                        label: const Text("Save",style: TextStyle(fontSize: 16)),
-                      ),
-
-                      // MaterialButton(
-                      //     color: Colors.blue,
-                      //     child: const Text("Save",
-                      //         style: TextStyle(color: Colors.white, fontSize: 20)),
-                      //
-                      //     onPressed: () {}),
+                      ],
                     ),
+                  ),
+                  FloatingActionButton.extended(
+
+
+
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        apiPost.postData(myController.text, myController1.text, myController2.text, myController3.text);
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Intern Successfully Added'),
+                            content: Text(myController.text+" Successfully Added"),
+                            actions: <Widget>[
+                              // TextButton(
+                              //   onPressed: () => Navigator.pop(context, 'Cancel'),
+                              //   child: const Text('Cancel'),
+                              // ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const MyApp()),
+                                  );
+                                },
+
+                                // Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+
+
+
+                        // showSnackBar(
+                        //     const SnackBar(content:
+                        //
+                        //     Text('Processing Data')),);
+
+                      }
+                      //   showDialog<String>(
+                      //   context: context,
+                      //   builder: (BuildContext context) => AlertDialog(
+                      //     title: const Text('Intern Successfully Added'),
+                      //     content: Text(myController.text+" Successfully Added"),
+                      //     actions: <Widget>[
+                      //       // TextButton(
+                      //       //   onPressed: () => Navigator.pop(context, 'Cancel'),
+                      //       //   child: const Text('Cancel'),
+                      //       // ),
+                      //       TextButton(
+                      //         onPressed: () {
+                      //           Navigator.push(
+                      //             context,
+                      //             MaterialPageRoute(builder: (context) => const MyApp()),
+                      //           );
+                      //         },
+                      //
+                      //             // Navigator.pop(context, 'OK'),
+                      //         child: const Text('OK'),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // );
+                      // snapshot.data!.result!.name.toString();
+                      // myController.text;
+                      // myController1.text;
+                      // myController2.text;
+                      // myController3.text;
+
+
+
+                      // print(myController.text);
+                      // print(myController1.text);
+                      // print(myController2.text);
+                      // print(myController3.text);
+
+
+                    },
+
+                    label: const Text("Save",style: TextStyle(fontSize: 16)),
                   ),
                 ],
               ),
