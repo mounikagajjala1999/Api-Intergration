@@ -5,6 +5,9 @@ import 'package:untitled/models/search_model.dart';
 import 'package:untitled/screens/add_intern_screen.dart';
 import 'package:untitled/streams.dart';
 
+
+
+
 void main() {
   runApp(const MyApp());
 }

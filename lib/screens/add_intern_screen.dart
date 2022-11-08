@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/main.dart';
 import 'package:untitled/screens/post_api.dart';
+import 'package:email_validator/email_validator.dart';
+
 
 import '../models/search_model.dart';
 
@@ -51,6 +53,10 @@ class _MyCustomTextState extends State<MyCustomText> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+    // void Validate(myController3) {
+    //   bool isvalid = EmailValidator.validate(myController3);
+    //   print(isvalid);
+    // }
     return Scaffold(
         appBar: AppBar(
           title: const Text('Second Route'),
@@ -83,7 +89,7 @@ class _MyCustomTextState extends State<MyCustomText> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
+                                return 'Please enter your name';
                               }
                               return null;
                             },
@@ -102,7 +108,7 @@ class _MyCustomTextState extends State<MyCustomText> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter some number';
+                                return 'Please enter your number';
                               }
                               return null;
                             },
@@ -120,7 +126,7 @@ class _MyCustomTextState extends State<MyCustomText> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
+                                return 'Please enter your designation';
                               }
                               return null;
                             },
@@ -136,12 +142,16 @@ class _MyCustomTextState extends State<MyCustomText> {
                               fillColor: Colors.white,
                               hintText: "Email id",
                             ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
+                            validator: (email) => email != null && !EmailValidator.validate(email)
+                                ? 'Enter a valid email'
+                                : null,
+
+                            // validator: (value) {
+                            //   if (value == null || value.isEmpty && value !=  ) {
+                            //     return 'Please enter some text';
+                            //   }
+                            //   return null;
+                            // },
                           ),
                         ),
 
