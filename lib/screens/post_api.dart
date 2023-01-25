@@ -14,19 +14,6 @@ class ApiPost {
       "email": myController3.toString(),
 
     });
-    // String url = "https://interns-new.herokuapp.com/list";
-    // Uri uri = Uri.parse(url);
-    // print(url);
-
-    // Map<String,dynamic> _body={
-    //   "name": myController,
-    //   "mobile": myController1,
-    //   "designation": myController2,
-    //   "email": myController3,
-    // };
-
-    // http.Response res = await http.post(uri); //network call
-
 
     print(res.body);
     if (res.statusCode == 200) {

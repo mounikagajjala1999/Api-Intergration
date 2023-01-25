@@ -5,9 +5,6 @@ import 'package:untitled/models/search_model.dart';
 import 'package:untitled/screens/add_intern_screen.dart';
 import 'package:untitled/streams.dart';
 
-
-
-
 void main() {
   runApp(const MyApp());
 }
@@ -41,8 +38,7 @@ class _InternListScreenState extends State<InternListScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    apiStream.getStreamData("157");
-
+    apiStream.getStreamData("155");
 
     super.initState();
   }
@@ -65,31 +61,31 @@ class _InternListScreenState extends State<InternListScreen> {
           height: 30,
         ),
         actions: [
-            // IconButton(
-            //   icon: Icon(Icons.add,color: Colors.white,size: 30),
-            //     onPressed: () => showDialog<String>(
-            //       context: context,
-            //       builder: (BuildContext context) => const AlertDialog(
-            //         content: TextField(
-            //           decoration: InputDecoration(
-            //             filled: true,
-            //             hintText: "Enter your name",
-            //           ),
-            //         ),
-            //         // actions: <Widget>[
-            //         //   TextButton(
-            //         //     onPressed: () => Navigator.pop(context, 'Cancel'),
-            //         //     child: const Text('Cancel'),
-            //         //   ),
-            //         //   TextButton(
-            //         //     onPressed: () => Navigator.pop(context, 'OK'),
-            //         //     child: const Text('OK'),
-            //         //   ),
-            //         //
-            //         // ],
-            //       ),
-            //     ),
-            // ),
+          // IconButton(
+          //   icon: Icon(Icons.add,color: Colors.white,size: 30),
+          //     onPressed: () => showDialog<String>(
+          //       context: context,
+          //       builder: (BuildContext context) => const AlertDialog(
+          //         content: TextField(
+          //           decoration: InputDecoration(
+          //             filled: true,
+          //             hintText: "Enter your name",
+          //           ),
+          //         ),
+          //         // actions: <Widget>[
+          //         //   TextButton(
+          //         //     onPressed: () => Navigator.pop(context, 'Cancel'),
+          //         //     child: const Text('Cancel'),
+          //         //   ),
+          //         //   TextButton(
+          //         //     onPressed: () => Navigator.pop(context, 'OK'),
+          //         //     child: const Text('OK'),
+          //         //   ),
+          //         //
+          //         // ],
+          //       ),
+          //     ),
+          // ),
 
           IconButton(
             onPressed: () {
@@ -121,7 +117,8 @@ class _InternListScreenState extends State<InternListScreen> {
           ),
           MaterialButton(
               color: Colors.blue,
-              child: const Text("search", style: TextStyle(color: Colors.white)),
+              child:
+                  const Text("search", style: TextStyle(color: Colors.white)),
               onPressed: () {
                 apiStream.getStreamData(_idController.text);
               }),
@@ -130,7 +127,6 @@ class _InternListScreenState extends State<InternListScreen> {
               stream: apiStream.stream,
               builder:
                   (BuildContext context, AsyncSnapshot<SearchModel?> snapshot) {
-
                 if (snapshot.hasData) {
                   // var name = snapshot.data!.result!.name;
                   // var email = snapshot.data!.result!.email;

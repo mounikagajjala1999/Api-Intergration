@@ -21,3 +21,4 @@ class Api {
     return null;
   }
 }
+Api apiget =Api();
